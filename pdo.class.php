@@ -6,7 +6,7 @@ class SQL {
 	
 	private $_PDO_CONFIG;
 	
-	function Connect() {
+	public function Connect() {
 		try {
 			$this->_PDO_CONFIG = parse_ini_file("sql.ini.php", true);
 			$this->_PDO_DNS = "mysql:host=".$this->_PDO_CONFIG["SQL"]["HOSTNAME"].";dbname=".$this->_PDO_CONFIG["SQL"]["DATABASE"];
@@ -18,7 +18,7 @@ class SQL {
 		}
 	}
 	
-	function Query($_Query) {
+	public function Query($_Query) {
 		$_Query_Result = $this->_PDO->query($_Query);
 		if($_Query_Result == false) {
 			header("Content-Type: text/plain");
@@ -27,6 +27,10 @@ class SQL {
 		}else{
 			return $_Query_Result;
 		}
+	}
+	
+	public function lastInsertId() {
+		return $this->_PDO->lastInsertId();
 	}
 }
 ?>
