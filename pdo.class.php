@@ -10,7 +10,7 @@ class SQL {
 		try {
 			$this->_PDO_CONFIG = parse_ini_file("sql.ini.php", true);
 			$this->_PDO_DNS = "mysql:host=".$this->_PDO_CONFIG["SQL"]["HOSTNAME"].";dbname=".$this->_PDO_CONFIG["SQL"]["DATABASE"];
-			$this->_PDO = new PDO($this->_PDO_DNS, $this->_PDO_CONFIG["SQL"]["USERNAME"], $this->_PDO_CONFIG["SQL"]["PASSWORD"]);
+			$this->_PDO = new PDO($this->_PDO_DNS, $this->_PDO_CONFIG["SQL"]["USERNAME"], $this->_PDO_CONFIG["SQL"]["PASSWORD"], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 		} catch (Exception $e) {
 			header("Content-Type: text/plain");
 			echo "[SQL][CONNECT] ", $e->getMessage();
